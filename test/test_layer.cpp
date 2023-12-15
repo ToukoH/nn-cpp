@@ -3,7 +3,7 @@
 
 int main() {
     int layerSize = 5;
-    Layer layer(layerSize, 2);
+    Layer layer(layerSize, 3);
 
     for (int i = 0; i < layerSize; ++i) {
         layer.setValue(i, static_cast<double>(i));

@@ -10,10 +10,11 @@
 
 class Neuron {
 public:
-	Neuron(double value);
-	Neuron(double value, int activationFunction);
+	Neuron(double value, double bias=0);
+	Neuron(double value, int activationFunction, double bias=0);
 
 	void setValue(double value);
+	void setBias(double bias);
 	void activateNeuron();
 	void differentiate();
 
@@ -21,7 +22,11 @@ public:
 		return this->value;
 	}
 
-	double getActivatedValue(){
+	double getBias() {
+		return this -> bias;
+	}
+
+	double getActivatedValue() {
 		return this->activatedValue;
 	}
 
@@ -32,6 +37,7 @@ public:
 private:
 	double value;
 	double activatedValue;
+	double bias;
 	double differentiatedValue;
 	int activationFunction;
 };

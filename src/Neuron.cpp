@@ -1,56 +1,66 @@
 #include "../include/Neuron.hpp"
 
-Neuron::Neuron(double value) {
+Neuron::Neuron(double value, double bias) {
 	this -> setValue(value);
 }
 
-Neuron::Neuron(double value, int activationFunction) {
+Neuron::Neuron(double value, int activationFunction, double bias) {
 	this -> setValue(value);
+	this -> setBias(bias);
+
 	this -> activationFunction = activationFunction;
-}
-
-void Neuron::activateNeuron() {
-    switch (activationFunction) {
-        case RELU:
-            this -> activatedValue = this -> value > 0 ? this -> value : 0;
-            break;
-
-        case SIGMOID:
-            this -> activatedValue = 1 / (1 + std::exp(-this -> value));
-            break;
-
-        case TANH:
-            this -> activatedValue = std::tanh(this -> value);
-            break;    
-
-        default:
-            this -> activatedValue = 1 / (1 + std::exp(-this -> value));
-            break;
-    }
-}
-
-void Neuron::differentiate() {
-	switch (activationFunction) {
-		case RELU:
-			this -> differentiatedValue = this -> value ? 1 : 0;
-			break;
-
-		case SIGMOID:
-			this -> differentiatedValue = (this -> activatedValue * (1 - this ->  activatedValue));
-			break;
-
-		case TANH:
-			this -> differentiatedValue = (1 - this -> activatedValue * this -> activatedValue);
-			break;
-
-		default:
-			this -> differentiatedValue = (this -> activatedValue * (1 - this ->  activatedValue));
-			break;
-	}
 }
 
 void Neuron::setValue(double value) {
 	this -> value = value;
 	activateNeuron();
 	differentiate();
+}
+
+void Neuron::setBias(double bias) {
+	this -> bias = bias;
+}
+
+void Neuron::activateNeuron() {
+	double input = this -> value + this -> bias;
+
+    switch (activationFunction) {
+        case RELU:
+            this -> activatedValue = input > 0 ? input : 0;
+            break;
+
+        case SIGMOID:
+            this -> activatedValue = 1 / (1 + std::exp(-input));
+            break;
+
+        case TANH:
+            this -> activatedValue = std::tanh(input);
+            break;    
+
+        default:
+            this -> activatedValue = 1 / (1 + std::exp(-input));
+            break;
+    }
+}
+
+void Neuron::differentiate() {
+	double input = this -> activatedValue + this -> bias;
+
+	switch (activationFunction) {
+		case RELU:
+			this -> differentiatedValue = input ? 1 : 0;
+			break;
+
+		case SIGMOID:
+			this -> differentiatedValue = (input * (1 - input));
+			break;
+
+		case TANH:
+			this -> differentiatedValue = (1 - input * input);
+			break;
+
+		default:
+			this -> differentiatedValue = (input * (1 - input));
+			break;
+	}
 }
