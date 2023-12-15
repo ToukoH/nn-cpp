@@ -15,14 +15,14 @@ public:
 		this -> neurons = neurons;
 	}
 
-    vector<double> getActivatedVals();
-    vector<Neuron *> getNeurons() {
+    std::vector<double> getActivatedValues();
+    std::vector<Neuron *> getNeurons() {
     	return this -> neurons;
 	}
 
-	Eigen::MatrixXd valuesToMatrix()
-	Eigen::MatrixXd actValsToMatrix()
-	Eigen::MatrixXd diffValsToMatrix()
+	Eigen::MatrixXd valuesToMatrix();
+	Eigen::MatrixXd actValsToMatrix();
+	Eigen::MatrixXd diffValsToMatrix();
 
 private:
 	int size;
