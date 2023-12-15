@@ -11,7 +11,7 @@
 class Neuron {
 public:
 	Neuron(double value);
-	Neuron(double value, int activationType);
+	Neuron(double value, int activationFunction);
 
 	void setValue(double value);
 	void activateNeuron();
@@ -26,14 +26,14 @@ public:
 	}
 
 	double getDifferentiatedValue() {
-		return this->differentiatedValue;
+		return this->differentiatedValue; 
 	}
 
 private:
 	double value;
 	double activatedValue;
 	double differentiatedValue;
-	int activationType;
+	int activationFunction;
 };
 
 #endif
