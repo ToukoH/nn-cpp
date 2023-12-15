@@ -4,11 +4,9 @@
 #include <iostream>
 #include <cmath>
 
-#define RELU
-#define SIGMOID
-#define TANH
-
-using namespace std;
+#define RELU 1
+#define SIGMOID 2
+#define TANH 3
 
 class Neuron {
 public:
@@ -35,6 +33,7 @@ private:
 	double value;
 	double activatedValue;
 	double differentiatedValue;
-
 	int activationType;
-}
+};
+
+#endif
